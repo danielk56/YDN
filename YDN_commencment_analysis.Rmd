@@ -1,0 +1,92 @@
+---
+title: "Untitled"
+author: "Daniel Kim"
+date: "5/13/2020"
+output: html_document
+---
+
+```{r}
+library(dplyr)
+library(questionr)
+```
+
+```{r}
+data <- read.csv("~/Downloads/YDN Senior Survey_May 12, 2020_19.34.csv")
+data
+```
+
+```{r}
+
+newdat <- (data[(data$Q3 == "Male"),])
+malepostgrad <- newdat$Q11_1_TEXT
+na.omit(malepostgrad)
+mean(na.omit(malepostgrad))
+
+
+prop.table(table(malepostgrad))
+
+newdat1 <- (data[(data$Q3 == "Female"),])
+femalepostgrad <- newdat1$Q1
+prop.table(table(femalepostgrad))
+
+
+newdat2 <- (data[(data$Q3 == "Nonbinary"),])
+nonbinarypostgrad <- newdat2$Q1
+prop.table(table(nonbinarypostgrad))
+
+newdat3 <- data$Q23
+
+questionr::freq(newdat3, cum = TRUE, sort = "dec", total = TRUE)
+98+74+47+39+32+26+15+8+1+1
+
+140/339
+4```
+
+
+```{r}
+newdat <- (data[(data$Q3 == "Male"),])
+malepostgrad <- newdat$Q11_1_TEXT
+na.omit(malepostgrad)
+mean((na.omit(malepostgrad)) > 100000)
+
+newdat <- (data[(data$Q3 == "Female"),])
+femalepostgrad <- newdat$Q11_1_TEXT
+mean((na.omit(femalepostgrad)) > 100000)
+
+
+salary <- data$Q11_1_TEXT
+mean((na.omit(salary)) < 30000)
+
+bonus <- data$Bonus
+mean((na.omit(bonus)) == "Yes")
+
+bonusamt <- data$Bonus.Salary
+mean((na.omit(bonusamt)))
+
+
+
+finance <- (data[(data$Q1 == "Finance"),])
+malebonus <- finance$Bonus
+mean((na.omit(malebonus)) == "Yes")
+
+financeamt <- finance$Bonus.Salary
+mean((na.omit(financeamt)))
+```
+
+```{r}
+academia <- (data[(data$Q1 == "Academia/Research"),])
+academiabonus <- academia$Bonus
+mean((na.omit(academiabonus)) == "Yes")
+
+academiaamt <- academia$Bonus.Salary
+mean((na.omit(academiaamt)))
+
+
+pub <- (data[(data$Q1 == "Public Service/Nonprofit"),])
+pubbonus <- pub$Bonus
+mean((na.omit(pubbonus)) == "Yes")
+
+pubamt <- pub$Bonus.Salary
+mean((na.omit(pubamt)))
+```
+
